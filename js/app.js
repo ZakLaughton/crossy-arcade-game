@@ -5,6 +5,10 @@ class Character {
     this.y = 0;
   }
 
+  update(dt){
+    return null;
+  }
+
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83) - 10);
   }
@@ -14,6 +18,29 @@ class Player extends Character {
   constructor() {
     super();
     this.sprite += 'char-cat-girl.png';
+    this.x = 2;
+    this.y = 5;
+  }
+
+  update(dt){
+    super.update();
+  }
+
+  handleInput(input) {
+    switch (input) {
+      case 'up':
+        this.y = this.y - 1;
+        break;
+      case 'right':
+        this.x = this.x + 1;
+        break;
+      case 'down':
+        this.y = this.y + 1;
+        break;
+      case 'left':
+        this.x = this.x - 1;
+        break;
+    }
   }
 }
 
@@ -23,6 +50,10 @@ class Bug extends Character {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
+  }
+
+  update(dt){
+    super.update();
   }
 }
 
