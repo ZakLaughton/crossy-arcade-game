@@ -6,7 +6,10 @@ class Character {
   }
 
   update(dt){
-    return null;
+    this.outOfBoundsUp = this.y < 0;
+    this.outOfBoundsRight = this.x > 5;
+    this.outOfBoundsDown = this.y > 5;
+    this.outOfBoundsLeft = this.x < 0;
   }
 
   render() {
@@ -54,7 +57,7 @@ class Bug extends Character {
 
   update(dt){
     super.update();
-    this.x = this.x + dt;
+    this.outOfBoundsRight ? this.x = -1 : this.x += dt;
   }
 }
 
