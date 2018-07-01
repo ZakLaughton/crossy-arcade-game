@@ -45,6 +45,17 @@ class Player extends Character {
         break;
     }
   }
+
+  checkCollisions() {
+    allEnemies.forEach(function(enemy) {
+      if (enemy.y === player.y) {
+        if (enemy.x - 0.5 < player.x && enemy.x + 0.5 > player.x ) {
+          player.x = 2;
+          player.y = 5;
+        }
+      }
+    })
+  }
 }
 
 class Bug extends Character {
