@@ -1,12 +1,12 @@
 class Character {
   constructor() {
     this.sprite = 'images/';
-    this.x = 2;
-    this.y = 5;
+    this.x = 0;
+    this.y = 0;
   }
 
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y = 83);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83) - 10);
   }
 }
 
@@ -27,7 +27,7 @@ class Bug extends Character {
 }
 
 const player = new Player();
-const allEnemies = [new Bug(0, 0)]
+const allEnemies = [new Bug(4, 3)]
 
 // Now write your own player class
 // This class requires an update(), render() and
