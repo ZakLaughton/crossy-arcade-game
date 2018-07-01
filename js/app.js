@@ -54,11 +54,12 @@ class Bug extends Character {
 
   update(dt){
     super.update();
+    this.x = this.x + dt;
   }
 }
 
 const player = new Player();
-const allEnemies = [new Bug(4, 3)]
+const allEnemies = [new Bug(0, 3)]
 
 // Now write your own player class
 // This class requires an update(), render() and
