@@ -6,10 +6,10 @@ class Character {
   }
 
   update(dt){
-    this.outOfBoundsUp = this.y < 0;
-    this.outOfBoundsRight = this.x > 5;
-    this.outOfBoundsDown = this.y > 5;
-    this.outOfBoundsLeft = this.x < 0;
+    this.isOutOfBoundsUp = this.y < 0;
+    this.isOutOfBoundsRight = this.x > 5;
+    this.isOutOfBoundsDown = this.y > 5;
+    this.isOutOfBoundsLeft = this.x < 0;
   }
 
   render() {
@@ -32,16 +32,16 @@ class Player extends Character {
   handleInput(input) {
     switch (input) {
       case 'up':
-        this.y = this.y - 1;
+        if (this.y > 0) { this.y = this.y - 1 }
         break;
       case 'right':
-        this.x = this.x + 1;
+        if (this.x < 4) { this.x = this.x + 1 }
         break;
       case 'down':
-        this.y = this.y + 1;
+        if (this.y < 5) { this.y = this.y + 1 }
         break;
       case 'left':
-        this.x = this.x - 1;
+        if (this.x > 0) { this.x = this.x - 1 }
         break;
     }
   }
@@ -57,7 +57,7 @@ class Bug extends Character {
 
   update(dt){
     super.update();
-    this.outOfBoundsRight ? this.x = -1 : this.x += dt;
+    this.isOutOfBoundsRight ? this.x = -1 : this.x += dt;
   }
 }
 
