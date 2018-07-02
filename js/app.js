@@ -64,16 +64,22 @@ class Bug extends Character {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = Math.random() * 3;
   }
 
   update(dt){
     super.update();
-    this.isOutOfBoundsRight ? this.x = -1 : this.x += dt * 2;
+    if (this.isOutOfBoundsRight) {
+      this.x = -1;
+      this.speed = Math.random() * 3;
+    } else {
+      this.x += (dt * this.speed);
+    }
   }
 }
 
 const player = new Player();
-const allEnemies = [new Bug(0, 3)]
+const allEnemies = [new Bug(0, 1), new Bug(0, 2), new Bug(0, 3)]
 
 // Now write your own player class
 // This class requires an update(), render() and
