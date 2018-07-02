@@ -74,7 +74,7 @@ class Bug extends Character {
     super.update();
     if (this.isOutOfBoundsRight || this.isOutOfBoundsLeft) {
       this.x = this.startingX;
-      this.speed = (Math.random() * 2) + 1 * this.directionNum;
+      this.speed = (Math.random() * 2 + 1) * this.directionNum;
     } else {
       this.x += (dt * this.speed);
     }
