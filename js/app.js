@@ -68,7 +68,7 @@ class Bug extends Character {
 
   update(dt){
     super.update();
-    this.isOutOfBoundsRight ? this.x = -1 : this.x += dt;
+    this.isOutOfBoundsRight ? this.x = -1 : this.x += dt * 2;
   }
 }
 
