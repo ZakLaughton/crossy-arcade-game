@@ -6,10 +6,10 @@ class Character {
   }
 
   update(dt){
-    this.isOutOfBoundsUp = this.y < 0;
+    this.isOutOfBoundsUp = this.y < -1;
     this.isOutOfBoundsRight = this.x > 5;
     this.isOutOfBoundsDown = this.y > 5;
-    this.isOutOfBoundsLeft = this.x < 0;
+    this.isOutOfBoundsLeft = this.x < -1;
   }
 
   render() {
@@ -59,19 +59,22 @@ class Player extends Character {
 }
 
 class Bug extends Character {
-  constructor(x, y) {
+  constructor(x, y, direction) {
     super();
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = (Math.random() * 2.5) + 0.5;
+    this.direction = direction;
+    this.directionNum = this.direction === 'right' ? 1 : -1;
+    this.startingX = this.direction === 'right' ? -1 : 5;
+    this.speed = (Math.random() * 2) + 1 * this.directionNum;
   }
 
   update(dt){
     super.update();
-    if (this.isOutOfBoundsRight) {
-      this.x = -1;
-      this.speed = (Math.random() * 2.5) + 0.5;
+    if (this.isOutOfBoundsRight || this.isOutOfBoundsLeft) {
+      this.x = this.startingX;
+      this.speed = (Math.random() * 2) + 1 * this.directionNum;
     } else {
       this.x += (dt * this.speed);
     }
@@ -79,7 +82,7 @@ class Bug extends Character {
 }
 
 const player = new Player();
-const allEnemies = [new Bug(0, 1), new Bug(0, 2), new Bug(0, 3)]
+const allEnemies = [new Bug(0, 1, 'right'), new Bug(5, 2, 'left'), new Bug(0, 3, 'right')]
 
 // Now write your own player class
 // This class requires an update(), render() and
