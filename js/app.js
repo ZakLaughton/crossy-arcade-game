@@ -65,19 +65,24 @@ class Bug extends Character {
     this.x = x;
     this.y = y;
     this.direction = direction;
-    this.directionNum = this.direction === 'right' ? 1 : -1;
     this.startingX = this.direction === 'right' ? -1 : 5;
-    this.speed = (Math.random() * 2) + 1 * this.directionNum;
+    this.speed = this.newSpeed();
   }
 
   update(dt){
     super.update();
     if (this.isOutOfBoundsRight || this.isOutOfBoundsLeft) {
       this.x = this.startingX;
-      this.speed = (Math.random() * 2 + 1) * this.directionNum;
+      this.speed = this.newSpeed();
     } else {
       this.x += (dt * this.speed);
     }
+  }
+
+  newSpeed(){
+    let newSpeed = (Math.random() * 2 + 1);
+    if (this.direction === 'left') { newSpeed *= -1}
+    return newSpeed;
   }
 }
 
