@@ -64,14 +64,14 @@ class Bug extends Character {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.random() * 3;
+    this.speed = (Math.random() * 2.5) + 0.5;
   }
 
   update(dt){
     super.update();
     if (this.isOutOfBoundsRight) {
       this.x = -1;
-      this.speed = Math.random() * 3;
+      this.speed = (Math.random() * 2.5) + 0.5;
     } else {
       this.x += (dt * this.speed);
     }
