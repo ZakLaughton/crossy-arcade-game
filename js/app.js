@@ -48,16 +48,16 @@ class Player extends Character {
   handleInput(input) {
     switch (input) {
       case 'up':
-        if (this.y > 0) { this.y = this.y - 1 }
+        if (this.y > 0) { this.y = this.y - 1; }
         break;
       case 'right':
-        if (this.x < 4) { this.x = this.x + 1 }
+        if (this.x < 4) { this.x = this.x + 1; }
         break;
       case 'down':
-        if (this.y < 5) { this.y = this.y + 1 }
+        if (this.y < 5) { this.y = this.y + 1; }
         break;
       case 'left':
-        if (this.x > 0) { this.x = this.x - 1 }
+        if (this.x > 0) { this.x = this.x - 1; }
         break;
     }
   }
@@ -82,7 +82,7 @@ class Player extends Character {
           }
         }
       }
-    })
+    });
   }
 
   /**
@@ -153,7 +153,7 @@ class Bug extends Character {
   update(dt){
     super.update();
     if (this.isOutOfBoundsRight || this.isOutOfBoundsLeft) {
-      this.reset()
+      this.reset();
     } else {
       this.x += (dt * this.speed);
     }
@@ -166,14 +166,14 @@ class Bug extends Character {
     // For randomized bugs, pick new direction/location.
     if (this.isRandomized) {
       let directions = ['left', 'right'];
-      this.direction = directions[Math.floor(Math.random() * 2)]
+      this.direction = directions[Math.floor(Math.random() * 2)];
       this.sprite = `images/enemy-bug-${this.direction}.png`;
       this.startingX = this.direction === 'right' ? -1 : 5;
       this.x = this.startingX;
       this.y = Math.floor(Math.random() * 3) + 1;
     }
     let newSpeed = (Math.random() * 2 + 1);
-    if (this.direction === 'left') { newSpeed *= -1};
+    if (this.direction === 'left') { newSpeed *= -1; }
     this.speed = newSpeed;
     this.x = this.startingX;
   }
@@ -181,7 +181,7 @@ class Bug extends Character {
 
 // Initialize player and enemies
 const player = new Player();
-const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right')]
+const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right')];
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
