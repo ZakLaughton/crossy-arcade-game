@@ -84,7 +84,7 @@ class Bug extends Character {
 
   reset(){
     let newSpeed = (Math.random() * 2 + 1);
-    if (this.direction === 'left') { newSpeed *= -1}
+    if (this.direction === 'left') { newSpeed *= -1};
     this.speed = newSpeed;
     this.x = this.startingX;
   }
