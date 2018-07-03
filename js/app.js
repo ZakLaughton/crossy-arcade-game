@@ -61,10 +61,10 @@ class Player extends Character {
 class Bug extends Character {
   constructor(x, y, direction) {
     super();
-    this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
     this.direction = direction;
+    this.sprite += `enemy-bug-${this.direction}.png`;
     this.startingX = this.direction === 'right' ? -1 : 5;
     this.speed = this.newSpeed();
   }
