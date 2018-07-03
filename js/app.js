@@ -70,7 +70,6 @@ class Player extends Character {
 
   newGame() {
     this.points = 0;
-    this.lives = 3;
     this.updateScore();
     const hearts = document.querySelectorAll('.lives li');
     for (let heart of hearts) {
@@ -98,13 +97,13 @@ class Player extends Character {
 }
 
 class Bug extends Character {
-  constructor(x, y, direction) {
+  constructor(y, direction) {
     super();
-    this.x = x;
-    this.y = y;
     this.direction = direction;
     this.sprite += `enemy-bug-${this.direction}.png`;
     this.startingX = this.direction === 'right' ? -1 : 5;
+    this.x = this.startingX;
+    this.y = y;
     this.speed = (Math.random() * 2 + 1);
   }
 
@@ -126,7 +125,7 @@ class Bug extends Character {
 }
 
 const player = new Player();
-const allEnemies = [new Bug(0, 1, 'right'), new Bug(5, 2, 'left'), new Bug(0, 3, 'right')]
+const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right')]
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
