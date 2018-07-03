@@ -49,7 +49,7 @@ class Player extends Character {
   checkCollisions() {
     allEnemies.forEach(function(enemy) {
       if (enemy.y === player.y) {
-        if (enemy.x - 0.4 < player.x && enemy.x + 0.4 > player.x ) {
+        if (enemy.x - 0.5 < player.x && enemy.x + 0.5 > player.x ) {
           player.reset();
         }
       }
