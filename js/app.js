@@ -66,23 +66,23 @@ class Bug extends Character {
     this.direction = direction;
     this.sprite += `enemy-bug-${this.direction}.png`;
     this.startingX = this.direction === 'right' ? -1 : 5;
-    this.speed = this.newSpeed();
+    this.speed = (Math.random() * 2 + 1);
   }
 
   update(dt){
     super.update();
     if (this.isOutOfBoundsRight || this.isOutOfBoundsLeft) {
-      this.x = this.startingX;
-      this.speed = this.newSpeed();
+      this.reset()
     } else {
       this.x += (dt * this.speed);
     }
   }
 
-  newSpeed(){
+  reset(){
     let newSpeed = (Math.random() * 2 + 1);
     if (this.direction === 'left') { newSpeed *= -1}
-    return newSpeed;
+    this.speed = newSpeed;
+    this.x = this.startingX;
   }
 }
 
