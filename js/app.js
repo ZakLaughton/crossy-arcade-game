@@ -24,6 +24,7 @@ class Player extends Character {
     this.x = 2;
     this.y = 5;
     this.lives = 3;
+    this.points = 0;
   }
 
   update(dt){
@@ -48,8 +49,8 @@ class Player extends Character {
   }
 
   checkCollisions() {
+    const lives = document.querySelectorAll('.lives li');
     allEnemies.forEach(function(enemy) {
-      let lives = document.querySelectorAll('.lives li');
       if (enemy.y === player.y) {
         if (enemy.x - 0.5 < player.x && enemy.x + 0.5 > player.x ) {
           player.lives -= 1;
@@ -60,22 +61,32 @@ class Player extends Character {
             lives[1].querySelector('i').classList = "fa fa-heart-o";
             player.reset();
           } else if (player.lives === 0) {
-            this.newGame();
+            player.newGame();
           }
         }
       }
     })
   }
 
-  addPoint() {
-    let score = document.getElementsByClassName('score')[0].innerHTML;
-    score = Number(score) + 1;
-    document.getElementsByClassName('score')[0].innerHTML = score;
+  newGame() {
+    this.points = 0;
+    this.lives = 3;
+    this.updateScore();
+    const hearts = document.querySelectorAll('.lives li');
+    for (let heart of hearts) {
+      heart.querySelector('i').classList = "fa fa-heart";
+    }
+    this.reset();
+  }
+
+  updateScore() {
+    document.getElementsByClassName('score')[0].innerHTML = this.points;
   }
 
   checkWin() {
     if (this.y === 0) {
-      this.addPoint();
+      this.points += 1;
+      this.updateScore();
       this.reset();
     }
   }
