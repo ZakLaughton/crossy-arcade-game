@@ -80,6 +80,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         player.checkCollisions();
+        player.checkWin();
     }
 
     /* This is called by the update function and loops through all of the

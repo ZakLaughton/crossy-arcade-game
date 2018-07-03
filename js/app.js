@@ -23,6 +23,7 @@ class Player extends Character {
     this.sprite += 'char-cat-girl.png';
     this.x = 2;
     this.y = 5;
+    this.lives = 3;
   }
 
   update(dt){
@@ -48,12 +49,35 @@ class Player extends Character {
 
   checkCollisions() {
     allEnemies.forEach(function(enemy) {
+      let lives = document.querySelectorAll('.lives li');
       if (enemy.y === player.y) {
         if (enemy.x - 0.5 < player.x && enemy.x + 0.5 > player.x ) {
-          player.reset();
+          player.lives -= 1;
+          if (player.lives === 2) {
+            lives[2].querySelector('i').classList = "fa fa-heart-o";
+            player.reset();
+          } else if (player.lives === 1) {
+            lives[1].querySelector('i').classList = "fa fa-heart-o";
+            player.reset();
+          } else if (player.lives === 0) {
+            this.newGame();
+          }
         }
       }
     })
+  }
+
+  addPoint() {
+    let score = document.getElementsByClassName('score')[0].innerHTML;
+    score = Number(score) + 1;
+    document.getElementsByClassName('score')[0].innerHTML = score;
+  }
+
+  checkWin() {
+    if (this.y === 0) {
+      this.addPoint();
+      this.reset();
+    }
   }
 
   reset() {
