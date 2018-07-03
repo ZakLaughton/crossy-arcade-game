@@ -1,3 +1,9 @@
+/**
+ * Represents a character in the game.
+ * @param {string} sprite - Location of image file for bug.
+ * @param {number} x - x coordinate of character.
+ * @param {number} y - y coordinate of character.
+ */
 class Character {
   constructor() {
     this.sprite = 'images/';
@@ -17,6 +23,11 @@ class Character {
   }
 }
 
+/**
+ * Represents the main player controlled by the user.
+ * @param {number} lives - Number of lives left in the game.
+ * @param {number} points - Number of times player has reached the water.
+ */
 class Player extends Character {
   constructor() {
     super();
@@ -31,6 +42,9 @@ class Player extends Character {
     super.update();
   }
 
+  /**
+   * Move player based on key pressed.
+   */
   handleInput(input) {
     switch (input) {
       case 'up':
@@ -48,6 +62,9 @@ class Player extends Character {
     }
   }
 
+  /**
+   * If the player hits a bug, reset the player and lose a life.
+   */
   checkCollisions() {
     const lives = document.querySelectorAll('.lives li');
     allEnemies.forEach(function(enemy) {
@@ -68,6 +85,9 @@ class Player extends Character {
     })
   }
 
+  /**
+   * Resets player, points, lives, and enemy count.
+   */
   newGame() {
     this.lives = 3;
     this.points = 0;
@@ -82,13 +102,20 @@ class Player extends Character {
     this.reset();
   }
 
+  /**
+   * Writes the player.score to the page.
+   */
   updateScore() {
     document.getElementsByClassName('score')[0].innerHTML = this.points;
   }
 
+  /**
+   * Add a point and reset the player if they reach the water.
+   */
   checkWin() {
     if (this.y === 0) {
       this.points += 1;
+      // Add a bug every 5 moves
       if (this.points % 5 === 0) {
         allEnemies.push(new Bug(1, 'left', true));
       }
@@ -97,12 +124,20 @@ class Player extends Character {
     }
   }
 
+  /**
+   * Sends the player back to start.
+   */
   reset() {
     this.x = 2;
     this.y = 5;
   }
 }
 
+/**
+ * Represents a bug enemy.
+ * @param {boolean} isRandomized - Switch to randomize direction and position on each reset.
+ * @param {string} direction - Direction of travel (left or right).
+ */
 class Bug extends Character {
   constructor(y, direction, isRandomized = false) {
     super();
@@ -124,7 +159,11 @@ class Bug extends Character {
     }
   }
 
+  /**
+   * Restarts the bug on its path.
+   */
   reset(){
+    // For randomized bugs, pick new direction/location.
     if (this.isRandomized) {
       let directions = ['left', 'right'];
       this.direction = directions[Math.floor(Math.random() * 2)]
@@ -140,6 +179,7 @@ class Bug extends Character {
   }
 }
 
+// Initialize player and enemies
 const player = new Player();
 const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right')]
 
