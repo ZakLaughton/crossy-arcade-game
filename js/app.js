@@ -69,6 +69,7 @@ class Player extends Character {
   }
 
   newGame() {
+    this.lives = 3;
     this.points = 0;
     this.updateScore();
     const hearts = document.querySelectorAll('.lives li');
