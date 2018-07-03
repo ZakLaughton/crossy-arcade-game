@@ -98,8 +98,9 @@ class Player extends Character {
 }
 
 class Bug extends Character {
-  constructor(y, direction) {
+  constructor(y, direction, isRandomized = false) {
     super();
+    this.isRandomized = isRandomized;
     this.direction = direction;
     this.sprite += `enemy-bug-${this.direction}.png`;
     this.startingX = this.direction === 'right' ? -1 : 5;
@@ -118,6 +119,14 @@ class Bug extends Character {
   }
 
   reset(){
+    if (this.isRandomized) {
+      let directions = ['left', 'right'];
+      this.direction = directions[Math.floor(Math.random() * 2)]
+      this.sprite = `images/enemy-bug-${this.direction}.png`;
+      this.startingX = this.direction === 'right' ? -1 : 5;
+      this.x = this.startingX;
+      this.y = Math.floor(Math.random() * 3) + 1;
+    }
     let newSpeed = (Math.random() * 2 + 1);
     if (this.direction === 'left') { newSpeed *= -1};
     this.speed = newSpeed;
@@ -126,7 +135,7 @@ class Bug extends Character {
 }
 
 const player = new Player();
-const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right')]
+const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right'), new Bug(1, 'right', true)]
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
