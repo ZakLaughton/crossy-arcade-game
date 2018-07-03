@@ -76,6 +76,9 @@ class Player extends Character {
     for (let heart of hearts) {
       heart.querySelector('i').classList = "fa fa-heart";
     }
+    for (let i = 3; i < allEnemies.length; i++) {
+      delete allEnemies[i];
+    }
     this.reset();
   }
 
@@ -86,6 +89,9 @@ class Player extends Character {
   checkWin() {
     if (this.y === 0) {
       this.points += 1;
+      if (this.points % 5 === 0) {
+        allEnemies.push(new Bug(1, 'left', true));
+      }
       this.updateScore();
       this.reset();
     }
@@ -135,7 +141,7 @@ class Bug extends Character {
 }
 
 const player = new Player();
-const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right'), new Bug(1, 'right', true)]
+const allEnemies = [new Bug(1, 'right'), new Bug(2, 'left'), new Bug(3, 'right')]
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
