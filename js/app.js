@@ -50,11 +50,15 @@ class Player extends Character {
     allEnemies.forEach(function(enemy) {
       if (enemy.y === player.y) {
         if (enemy.x - 0.4 < player.x && enemy.x + 0.4 > player.x ) {
-          player.x = 2;
-          player.y = 5;
+          player.reset();
         }
       }
     })
+  }
+
+  reset() {
+    this.x = 2;
+    this.y = 5;
   }
 }
 
